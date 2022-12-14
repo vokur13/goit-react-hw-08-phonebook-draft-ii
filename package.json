@@ -1,14 +1,15 @@
 {
-  "name": "goit-react-hw-06-phonebook-draft-ii",
+  "name": "goit-react-hw-08-phonebook-ii",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vokur13.github.io/goit-react-hw-06-phonebook-draft-ii/",
+  "homepage": "https://vokur13.github.io/goit-react-hw-08-phonebook-ii/",
   "dependencies": {
     "@hookform/resolvers": "^2.9.9",
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "modern-normalize": "^1.1.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.3",
     "formik": "^2.2.9",
