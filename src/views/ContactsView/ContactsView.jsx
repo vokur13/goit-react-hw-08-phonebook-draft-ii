@@ -1,12 +1,10 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import {
-  useGetContactsQuery,
-  useAddContactMutation,
-} from 'redux/contacts/contacts';
-import { contactsSelectors, contactsSlice } from 'redux/contacts';
+  contactsOperations,
+  contactsSelectors,
+  contactsSlice,
+} from 'redux/contactsHW7';
 import { Box } from 'components/Box';
 import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
@@ -15,46 +13,36 @@ import { nanoid } from 'nanoid';
 
 export const ContactsView = () => {
   const dispatch = useDispatch();
-  const { data, error, isUninitialized, isFetching } = useGetContactsQuery('', {
-    // skip: '' === '',
-    // pollingInterval: 3000,
-    // refetchOnFocus: true,
-    refetchOnReconnect: true,
-  });
-
-  const [addContact, { isLoading }] = useAddContactMutation();
+  const isLoading = useSelector(contactsSelectors.selectIsLoading);
+  const error = useSelector(contactsSelectors.selectError);
+  const items = useSelector(contactsSelectors.selectContacts);
   const filter = useSelector(contactsSelectors.selectFilter);
-  const notify = text => toast(text);
 
-  console.log(isUninitialized);
+  useEffect(() => {
+    dispatch(contactsOperations.fetchContacts());
+  }, [dispatch]);
 
-  async function handleSubmit({ lastName, firstName, phone }) {
-    try {
-      const checkName = data.some(
-        item =>
-          item.lastName.toLowerCase().trim() ===
-            lastName.toLowerCase().trim() &&
-          item.firstName.toLowerCase().trim() === firstName.toLowerCase().trim()
-      );
-      checkName
-        ? alert(`${(lastName, firstName)} is already in contacts`)
-        : await addContact(
-            {
-              id: nanoid(),
-              lastName,
-              firstName,
-              phone,
-            },
-            notify(`Contact ${lastName} ${firstName} created`)
-          );
-    } catch (error) {
-      console.log(error.message);
-    }
+  function handleSubmit({ name, number }) {
+    const checkName = items.some(
+      item => item.name.toLowerCase().trim() === name.toLowerCase().trim()
+    );
+    checkName
+      ? alert(`${name} is already in contacts`)
+      : dispatch(
+          contactsOperations.addContact({
+            id: nanoid(),
+            name,
+            number,
+          })
+        );
   }
 
   function onFilterChange([value]) {
-    dispatch(contactsSlice.findContact(value));
-
+    // if (value && value.length > 0) {
+    //   dispatch(contactsSlice.findContact(value));
+    // } else if (!value) {
+    //   dispatch(contactsSlice.findContact((value = '')));
+    // }
     // !value
     //   ? dispatch(contactsSlice.findContact((value = '')))
     //   : dispatch(contactsSlice.findContact(value));
@@ -62,26 +50,29 @@ export const ContactsView = () => {
 
   const filteredItems = useMemo(() => {
     if (filter) {
-      return data.filter(item => {
-        return item.lastName
+      return items.filter(item => {
+        return item.name
           .toLowerCase()
           .trim()
           .includes(filter.toLowerCase().trim());
       });
     }
-    return data;
-  }, [data, filter]);
+    return items;
+  }, [filter, items]);
+
+  // function handleDelete(itemID) {
+  //   dispatch(contactsOperations.deleteContact(itemID));
+  // }
 
   return (
     <Box width={1} p={4} bg="bgBasic" as="main">
-      <ToastContainer />
       {error && <p>{error}</p>}
       <h1>Phonebook</h1>
-      <ContactForm onFormSubmit={handleSubmit} isLoading={isLoading} />
+      <ContactForm onFormSubmit={handleSubmit} />
       <h2>Contacts</h2>
       <Filter onChange={onFilterChange} />
-      {isFetching && <p>Loading contacts...</p>}
-      {data && data.length > 0 && <ContactList list={filteredItems} />}
+      {isLoading && <p>Loading contacts...</p>}
+      {items && items.length > 0 && <ContactList list={filteredItems} />}
     </Box>
   );
 };

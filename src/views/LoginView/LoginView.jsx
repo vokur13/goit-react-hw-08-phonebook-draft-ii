@@ -1,7 +1,8 @@
 import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { authOperations } from '../../redux/auth';
-import { useLogInUserMutation } from 'redux/auth/auth-rtk-query';
+import { useDispatch } from 'react-redux';
+import { authOperations } from '../../redux/auth';
+// import { useLogInUserMutation } from 'redux/auth/auth-rtk-query';
+// import { authSlice } from '../../redux/auth';
 
 const styles = {
   form: {
@@ -15,10 +16,10 @@ const styles = {
 };
 
 export const LoginView = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [logInUser, { isSuccess }] = useLogInUserMutation();
+  // const [logInUser] = useLogInUserMutation();
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -33,12 +34,14 @@ export const LoginView = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // dispatch(authOperations.logIn({ email, password }));
+
     try {
-      await logInUser({
-        email,
-        password,
-      });
+      // await logInUser({
+      //   email,
+      //   password,
+      // });
+      dispatch(authOperations.logIn({ email, password }));
+      // dispatch(authSlice.isLoggedIn(true));
     } catch (error) {
     } finally {
       setEmail('');

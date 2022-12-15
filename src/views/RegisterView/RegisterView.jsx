@@ -1,7 +1,7 @@
 import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { authOperations } from '../../redux/auth';
-import { useRegisterUserMutation } from 'redux/auth/auth-rtk-query';
+import { useDispatch } from 'react-redux';
+import { authOperations } from '../../redux/auth';
+// import { useRegisterUserMutation } from 'redux/auth/auth-rtk-query';
 
 const styles = {
   form: {
@@ -15,11 +15,11 @@ const styles = {
 };
 
 export const RegisterView = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [registerUser] = useRegisterUserMutation();
+  // const [registerUser] = useRegisterUserMutation();
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -37,12 +37,12 @@ export const RegisterView = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      // dispatch(authOperations.register({ name, email, password }));
-      await registerUser({
-        name,
-        email,
-        password,
-      });
+      dispatch(authOperations.register({ name, email, password }));
+      // await registerUser({
+      //   name,
+      //   email,
+      //   password,
+      // });
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -58,12 +58,12 @@ export const RegisterView = () => {
 
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
         <label style={styles.label}>
-          Имя
+          Name
           <input type="text" name="name" value={name} onChange={handleChange} />
         </label>
 
         <label style={styles.label}>
-          Почта
+          e-mail
           <input
             type="email"
             name="email"
@@ -73,7 +73,7 @@ export const RegisterView = () => {
         </label>
 
         <label style={styles.label}>
-          Пароль
+          Password
           <input
             type="password"
             name="password"

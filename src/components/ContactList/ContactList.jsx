@@ -15,7 +15,7 @@ export const ContactList = ({ list }) => {
       <List>
         {list
           .map(item => <ContactItem key={item.id} {...item} />)
-          .sort((a, b) => a.props.lastName.localeCompare(b.props.lastName))}
+          .sort((a, b) => a.props.name.localeCompare(b.props.name))}
       </List>
     </Box>
   );

@@ -1,25 +1,28 @@
 import PropTypes from 'prop-types';
-import { useDeleteContactMutation } from 'redux/contacts/contacts';
+import { useSelector, useDispatch } from 'react-redux';
+// import { useDeleteContactMutation } from 'redux/contacts/contacts';
 import { toast } from 'react-toastify';
 import { Item, Name, Number } from './ContactItem.styled';
 import { Button } from '../Button';
+import { contactsOperations, contactsSelectors } from 'redux/contactsHW7';
 
-export const ContactItem = ({ id, lastName, firstName, phone }) => {
-  const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
+export const ContactItem = ({ id, name, number }) => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(contactsSelectors.selectIsLoading);
+  // const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
   const notify = text => toast(text);
 
   return (
     <Item>
-      <Name>{lastName + ', ' + firstName + ':'}</Name>
-      <Number>{phone}</Number>
+      <Name>{name + ':'}</Name>
+      <Number>{number}</Number>
       <Button
         type="button"
-        onClick={() =>
-          deleteContact(id, notify(`Contact ${lastName} ${firstName} removed`))
-        }
-        disabled={isDeleting}
+        onClick={() => dispatch(contactsOperations.deleteContact(id))}
+        disabled={isLoading}
       >
-        {isDeleting ? 'Deleting...' : 'Delete'}
+        {/* Delete */}
+        {isLoading ? 'Deleting...' : 'Delete'}
       </Button>
     </Item>
   );
@@ -28,7 +31,6 @@ export const ContactItem = ({ id, lastName, firstName, phone }) => {
 ContactItem.propTypes = {
   id: PropTypes.string.isRequired,
   createdAt: PropTypes.string,
-  lastName: PropTypes.string.isRequired,
-  firstName: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
 };
