@@ -38,6 +38,7 @@ export const ContactsView = () => {
   }
 
   function onFilterChange([value]) {
+    dispatch(contactsSlice.findContact(value));
     // if (value && value.length > 0) {
     //   dispatch(contactsSlice.findContact(value));
     // } else if (!value) {
@@ -65,11 +66,11 @@ export const ContactsView = () => {
   // }
 
   return (
-    <Box width={1} p={4} bg="bgBasic" as="main">
+    <Box width={1} p={4} as="main">
       {error && <p>{error}</p>}
-      <h1>Phonebook</h1>
+      <h2>Add contact</h2>
       <ContactForm onFormSubmit={handleSubmit} />
-      <h2>Contacts</h2>
+      <h2>Find contact</h2>
       <Filter onChange={onFilterChange} />
       {isLoading && <p>Loading contacts...</p>}
       {items && items.length > 0 && <ContactList list={filteredItems} />}

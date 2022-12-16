@@ -8,6 +8,7 @@ export const NavItem = styled(NavLink)`
   padding: ${p => p.theme.space[0]}px;
   border-radius: 4px;
   text-decoration: none;
+  font-weight: ${p => p.theme.fontWeights.bold};
   color: ${p => p.theme.colors.text};
   &:not(:last-child) {
     margin-right: ${p => p.theme.space[4]}px;

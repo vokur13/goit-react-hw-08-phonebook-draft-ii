@@ -1,13 +1,8 @@
 import React from 'react';
-// import { NavLink } from 'react-router-dom';
 import { NavItem } from './Navigation.styled';
 import { Box } from '../Box';
-
-const navItems = [
-  { href: '/', text: 'Home' },
-  // { href: '/', text: 'Home', icon: SomeIcon },
-  { href: 'contacts', text: 'Contacts' },
-];
+import { useSelector } from 'react-redux';
+import { authSelectors } from '../../redux/auth';
 
 // const styles = {
 //   link: {
@@ -22,24 +17,23 @@ const navItems = [
 //   },
 // };
 
-export const Navigation = () => (
-  <Box as="nav">
-    {navItems.map(({ href, text }) => (
-      <NavItem to={href} key={href}>
-        {text}
-      </NavItem>
-    ))}
-    {/* <NavLink to="/" exact style={styles.link} activeStyle={styles.activeLink}>
-      Home
-    </NavLink>
+export const Navigation = () => {
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
 
-    <NavLink
-      to="/contacts"
-      exact
-      style={styles.link}
-      activeStyle={styles.activeLink}
-    >
-      Contacts
-    </NavLink> */}
-  </Box>
-);
+  const navItems = [
+    { href: '/', text: 'Home' },
+    // { href: '/', text: 'Home', icon: SomeIcon },
+    isLoggedIn && { href: 'contacts', text: 'Contacts' },
+    // isLoggedIn && { href: '/upload', text: 'Upload' },
+  ];
+
+  return (
+    <Box as="nav" display="flex">
+      {navItems.map(({ href, text }) => (
+        <NavItem key={href} to={href}>
+          {text}
+        </NavItem>
+      ))}
+    </Box>
+  );
+};
