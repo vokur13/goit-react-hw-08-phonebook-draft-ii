@@ -57,21 +57,6 @@ export const ContactForm = ({ onFormSubmit, isLoading }) => {
         {errors.name?.type === 'required' && (
           <p role="alert">Name is required</p>
         )}
-        {/* <Label htmlFor={firstNameId}>First name</Label>
-        <Input
-          id={firstNameId}
-          type="text"
-          title="First name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          {...register('firstName', {
-            required: true,
-            pattern:
-              /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/i,
-          })}
-          aria-invalid={errors.firstName ? 'true' : 'false'}
-        />
-        {errors.firstName?.type === 'required' && (
-          <p role="alert">First name is required</p>
-        )} */}
         <Label htmlFor={phoneID}>Number</Label>
         <Input
           id={phoneID}

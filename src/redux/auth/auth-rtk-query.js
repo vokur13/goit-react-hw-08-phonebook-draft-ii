@@ -26,10 +26,10 @@ export const userApi = createApi({
     //       : // an error occurred, but we still want to refetch this query when `{ type: 'Contacts', id: 'LIST' }` is invalidated
     //         [{ type: 'User', id: 'LIST' }],
     // }),
-    // getContactbyName: build.query({
-    //   query: lastName => `/phonebook/${lastName}`,
-    //   providesTags: (result, error, id) => [{ type: 'User', id }],
-    // }),
+    getContactbyName: build.query({
+      query: lastName => `/phonebook/${lastName}`,
+      providesTags: (result, error, id) => [{ type: 'User', id }],
+    }),
     registerUser: build.mutation({
       query(body) {
         return {

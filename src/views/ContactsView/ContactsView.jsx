@@ -40,14 +40,6 @@ export const ContactsView = () => {
 
   function onFilterChange([value]) {
     dispatch(contactsSlice.findContact(value));
-    // if (value && value.length > 0) {
-    //   dispatch(contactsSlice.findContact(value));
-    // } else if (!value) {
-    //   dispatch(contactsSlice.findContact((value = '')));
-    // }
-    // !value
-    //   ? dispatch(contactsSlice.findContact((value = '')))
-    //   : dispatch(contactsSlice.findContact(value));
   }
 
   const filteredItems = useMemo(() => {
@@ -61,10 +53,6 @@ export const ContactsView = () => {
     }
     return items;
   }, [filter, items]);
-
-  // function handleDelete(itemID) {
-  //   dispatch(contactsOperations.deleteContact(itemID));
-  // }
 
   return (
     <Box

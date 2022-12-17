@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import { useDeleteContactMutation } from 'redux/contacts/contacts';
 // import { toast } from 'react-toastify';
 import { Item, Name, Number } from './ContactItem.styled';
 import { Button } from '../Button';
-import { contactsOperations, contactsSelectors } from 'redux/contactsHW7';
+import { contactsOperations } from 'redux/contactsHW7';
 
 export const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(contactsSelectors.selectIsLoading);
+  // const isLoading = useSelector(contactsSelectors.selectIsLoading);
   // const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
   // const notify = text => toast(text);
 
@@ -19,10 +19,10 @@ export const ContactItem = ({ id, name, number }) => {
       <Button
         type="button"
         onClick={() => dispatch(contactsOperations.deleteContact(id))}
-        disabled={isLoading}
+        // disabled={isLoading}
       >
-        {/* Delete */}
-        {isLoading ? 'Deleting...' : 'Delete'}
+        Delete
+        {/* {isLoading ? 'Deleting...' : 'Delete'} */}
       </Button>
     </Item>
   );
