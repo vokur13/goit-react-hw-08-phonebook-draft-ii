@@ -1,7 +1,7 @@
 // import { configureStore } from '@reduxjs/toolkit';
 // // Or from '@reduxjs/toolkit/query/react'
 // import { setupListeners } from '@reduxjs/toolkit/query';
-import { contactsApi } from './contacts/contacts';
+// import { contactsApi } from './contacts/contacts';
 // import { userApi } from './auth/auth-rtk-query';
 // import { contactsReducer } from './contacts/contactsSlice';
 // import { authReducer } from './auth';
@@ -80,7 +80,7 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
-    [contactsApi.reducerPath]: contactsApi.reducer,
+    // [contactsApi.reducerPath]: contactsApi.reducer,
     contacts: contactsReducer,
   },
   middleware: getDefaultMiddleware => [
@@ -89,7 +89,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-    contactsApi.middleware,
+    // contactsApi.middleware,
     logger,
     // thunk,
   ],
