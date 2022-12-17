@@ -1,5 +1,6 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
 import { fetchContacts, addContact, deleteContact } from './contactsOperations';
+import { initailContacts } from 'utils/initialContacts';
 
 function isRejectedAction(action) {
   return action.type.endsWith('rejected');
@@ -18,7 +19,7 @@ export const findContact = createAction('findContact');
 
 const initialState = {
   contacts: {
-    items: [],
+    items: initailContacts,
     isLoading: false,
     error: null,
   },

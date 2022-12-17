@@ -13,6 +13,7 @@ export const AppBar = () => {
   return (
     <Box
       as="header"
+      position="fixed"
       width={1}
       display="flex"
       alignItems="center"
@@ -21,7 +22,13 @@ export const AppBar = () => {
       px={4}
       boxShadow="0px 4px 8px 0px rgba(34, 60, 80, 0.42)"
     >
-      <Box as="nav" display="flex" flex={1} justifyContent="space-between">
+      <Box
+        as="nav"
+        display="flex"
+        flex={1}
+        justifyContent="space-between"
+        py={3}
+      >
         {/* {!isRefreshing && <Navigation />} */}
         <Navigation />
         {isLoggedIn ? <UserMenu /> : <AuthNav />}

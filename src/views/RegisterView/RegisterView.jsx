@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../../redux/auth';
+import { Box } from 'components/Box';
 // import { useRegisterUserMutation } from 'redux/auth/auth-rtk-query';
 
 const styles = {
@@ -53,8 +54,17 @@ export const RegisterView = () => {
   }
 
   return (
-    <div>
-      <h1>Страница регистрации</h1>
+    <Box
+      height="100vh"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      // fontSize="72px"
+      color="#010101"
+      paddingTop={50}
+    >
+      <h1>Register</h1>
 
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
         <label style={styles.label}>
@@ -82,8 +92,8 @@ export const RegisterView = () => {
           />
         </label>
 
-        <button type="submit">Зарегистрироваться</button>
+        <button type="submit">Register</button>
       </form>
-    </div>
+    </Box>
   );
 };

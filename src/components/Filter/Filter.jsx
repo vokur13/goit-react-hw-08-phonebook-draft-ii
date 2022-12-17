@@ -26,7 +26,7 @@ export const Filter = ({ onChange }) => {
       p={2}
       mb={3}
       bg="bgComponent"
-      width="50%"
+      width="95%"
       borderRadius="normal"
       boxShadow="basic"
     >

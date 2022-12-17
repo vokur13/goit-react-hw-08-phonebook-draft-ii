@@ -37,7 +37,7 @@ export const ContactForm = ({ onFormSubmit, isLoading }) => {
       p={2}
       mb={4}
       bg="bgComponent"
-      width="50%"
+      width="95%"
       borderRadius="normal"
       boxShadow="basic"
     >

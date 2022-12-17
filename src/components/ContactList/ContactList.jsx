@@ -15,7 +15,7 @@ export const ContactList = ({ list }) => {
         display="block"
         p={2}
         bg="bgComponent"
-        width="50%"
+        width={1}
         borderRadius="normal"
         boxShadow="basic"
       >

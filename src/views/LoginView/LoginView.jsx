@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../../redux/auth';
+import { Box } from 'components/Box';
 // import { useLogInUserMutation } from 'redux/auth/auth-rtk-query';
 // import { authSlice } from '../../redux/auth';
 
@@ -50,12 +51,21 @@ export const LoginView = () => {
   }
 
   return (
-    <div>
-      <h1>Страница логина</h1>
+    <Box
+      height="100vh"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      // fontSize="72px"
+      color="#010101"
+      paddingTop={50}
+    >
+      <h1>Login page</h1>
 
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
         <label style={styles.label}>
-          Почта
+          e-Mail
           <input
             type="email"
             name="email"
@@ -65,7 +75,7 @@ export const LoginView = () => {
         </label>
 
         <label style={styles.label}>
-          Пароль
+          Password
           <input
             type="password"
             name="password"
@@ -74,8 +84,8 @@ export const LoginView = () => {
           />
         </label>
 
-        <button type="submit">Войти</button>
+        <button type="submit">Login</button>
       </form>
-    </div>
+    </Box>
   );
 };

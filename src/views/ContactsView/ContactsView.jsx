@@ -10,6 +10,7 @@ import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
 import { ContactList } from 'components/ContactList';
 import { nanoid } from 'nanoid';
+import { Title } from './ContactsView.styled';
 
 export const ContactsView = () => {
   const dispatch = useDispatch();
@@ -66,14 +67,25 @@ export const ContactsView = () => {
   // }
 
   return (
-    <Box width={1} p={4} as="main">
-      {error && <p>{error}</p>}
-      <h2>Add contact</h2>
-      <ContactForm onFormSubmit={handleSubmit} />
-      <h2>Find contact</h2>
-      <Filter onChange={onFilterChange} />
-      {isLoading && <p>Loading contacts...</p>}
-      {items && items.length > 0 && <ContactList list={filteredItems} />}
+    <Box
+      width={1}
+      p={4}
+      as="main"
+      paddingTop={75}
+      display="grid"
+      gridTemplateColumns="1fr 1fr"
+    >
+      <Box width={1}>
+        {error && <p>{error}</p>}
+        <Title>Add contact</Title>
+        <ContactForm onFormSubmit={handleSubmit} />
+        <h2>Find contact</h2>
+        <Filter onChange={onFilterChange} />
+      </Box>
+      <Box width={1}>
+        {isLoading && <p>Loading contacts...</p>}
+        {items && items.length > 0 && <ContactList list={filteredItems} />}
+      </Box>
     </Box>
   );
 };
